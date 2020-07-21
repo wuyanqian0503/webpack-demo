@@ -3,29 +3,22 @@ let path = require("path")
 let HtmlWebpackPlugin = require("html-webpack-plugin")
 let MiniCssExtractPlugin = require("mini-css-extract-plugin")
 let OptimizeCss = require("optimize-css-assets-webpack-plugin")
-console.log(path.resolve("build"))
-const insertAtTop = (element) => {
-  var parent = document.querySelector("head")
-  // eslint-disable-next-line no-underscore-dangle
-  var lastInsertedElement = window._lastElementInsertedByStyleLoader
-
-  if (!lastInsertedElement) {
-    parent.insertBefore(element, parent.firstChild)
-  } else if (lastInsertedElement.nextSibling) {
-    parent.insertBefore(element, lastInsertedElement.nextSibling)
-  } else {
-    parent.appendChild(element)
-  }
-
-  // eslint-disable-next-line no-underscore-dangle
-  window._lastElementInsertedByStyleLoader = element
-}
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   optimization: {
-    minimizer: [new OptimizeCss()],
+    minimizer: [
+      // new UglifyJsPlugin({
+      //   cache: true,
+      //   parallel: true,
+      //   sourceMap: true
+      // }),
+      new TerserJSPlugin({}),
+      new OptimizeCss()
+    ],
   },
-  mode: "production", // 模式 development production
+  mode: "development", // 模式 development production
   entry: "./src/index.js", // 入口
   output: {
     filename: "bundle.[hash:8].js", //打包后的文件名, 只显示8位的hash

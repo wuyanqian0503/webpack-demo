@@ -1,6 +1,11 @@
 require("./index.css")
+
 require("./index.less")
 
-let a = require("./a.js")
+// let a = require("./a.js")
 
-a()
+// a()
+
+const test = () => {
+  console.log("test")
+}
