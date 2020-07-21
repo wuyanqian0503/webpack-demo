@@ -51,11 +51,28 @@ module.exports = {
   module: {
     // 模块
     rules: [
+      {
+        test:/\.js$/,
+        use: {
+          loader: "babel-loader",
+          options: {  // 用babel-loader 需要把es6转es5
+            presets: [
+              '@babel/preset-env'
+            ],
+            plugins: [
+              ["@babel/plugin-proposal-decorators", { "legacy": true }],
+              '@babel/plugin-proposal-class-properties',
+              "@babel/plugin-transform-runtime"
+              // ["@babel/plugin-proposal-class-properties", { "loose" : true }]
+            ]
+          }
+        }
+      },
       // 规则
       // ---------- loader的特点 --------------
       // use字段用于表示针对某一规则使用的loader
       // loader的特点是，每个loader功能单一
-      // loader的用法，规则中的use字段如果是字符串的话，表示只用一个loader
+      // loader的用法，规则中的use字段如果是字符串或者对象的话，表示只用一个loader
       // 多个loader需要use用一个数组表示，数组中的loader可以用字符串或者对象表示
       // 当loader是用对象表示时，可以针对某一loader指定一些其他配置项
       // loader的顺序默认是从右向左，从下到上执行
