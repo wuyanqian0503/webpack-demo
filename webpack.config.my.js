@@ -25,7 +25,7 @@ module.exports = {
   optimization: {
     minimizer: [new OptimizeCss()],
   },
-  mode: "development", // 模式 development production
+  mode: "production", // 模式 development production
   entry: "./src/index.js", // 入口
   output: {
     filename: "bundle.[hash:8].js", //打包后的文件名, 只显示8位的hash
