@@ -1,6 +1,7 @@
-require("./index.css")
+import "./index.css"
 
-require("./index.less")
+import "./index.less"
+import '@babel/polyfill'
 
 // let a = require("./a.js")
 
@@ -9,6 +10,8 @@ require("./index.less")
 const test = () => {
   console.log("includes:", [1, 2, 3].includes(1))
 }
+
+test()
 
 @log
 class A {
